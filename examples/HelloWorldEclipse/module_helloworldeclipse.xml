@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_helloworldeclipse" default="compile.module.helloworldeclipse">
+  <dirname property="module.helloworldeclipse.basedir" file="${ant.file.module_helloworldeclipse}"/>
+  
+  <property name="module.jdk.home.helloworldeclipse" value="${jdk.home.android_api_19_platform}"/>
+  <property name="module.jdk.bin.helloworldeclipse" value="${jdk.bin.android_api_19_platform}"/>
+  <property name="module.jdk.classpath.helloworldeclipse" value="jdk.classpath.android_api_19_platform"/>
+  
+  <property name="compiler.args.helloworldeclipse" value="${compiler.args}"/>
+  
+  <property name="helloworldeclipse.output.dir" value="${module.helloworldeclipse.basedir}/bin/classes"/>
+  <property name="helloworldeclipse.testoutput.dir" value="${module.helloworldeclipse.basedir}/classes/test/HelloWorldEclipse"/>
+  
+  <path id="helloworldeclipse.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="helloworldeclipse.module.production.classpath">
+    <path refid="${module.jdk.classpath.helloworldeclipse}"/>
+    <pathelement location="${basedir}/lib/codemodel-2.5-SNAPSHOT.jar"/>
+    <path refid="library.codemodel-2.5-snapshot.classpath"/>
+  </path>
+  
+  <path id="helloworldeclipse.runtime.production.module.classpath">
+    <pathelement location="${helloworldeclipse.output.dir}"/>
+    <pathelement location="${basedir}/lib/codemodel-2.5-SNAPSHOT.jar"/>
+    <path refid="library.codemodel-2.5-snapshot.classpath"/>
+  </path>
+  
+  <path id="helloworldeclipse.module.classpath">
+    <path refid="${module.jdk.classpath.helloworldeclipse}"/>
+    <pathelement location="${helloworldeclipse.output.dir}"/>
+    <pathelement location="${basedir}/lib/codemodel-2.5-SNAPSHOT.jar"/>
+    <path refid="library.codemodel-2.5-snapshot.classpath"/>
+  </path>
+  
+  <path id="helloworldeclipse.runtime.module.classpath">
+    <pathelement location="${helloworldeclipse.testoutput.dir}"/>
+    <pathelement location="${helloworldeclipse.output.dir}"/>
+    <pathelement location="${basedir}/lib/codemodel-2.5-SNAPSHOT.jar"/>
+    <path refid="library.codemodel-2.5-snapshot.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.helloworldeclipse">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.helloworldeclipse">
+    <patternset refid="excluded.from.module.helloworldeclipse"/>
+  </patternset>
+  
+  <path id="helloworldeclipse.module.sourcepath">
+    <dirset dir="${module.helloworldeclipse.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.helloworldeclipse" depends="compile.module.helloworldeclipse.production,compile.module.helloworldeclipse.tests" description="Compile module HelloWorldEclipse"/>
+  
+  <target name="compile.module.helloworldeclipse.production" depends="register.custom.compilers" description="Compile module HelloWorldEclipse; production classes">
+    <mkdir dir="${helloworldeclipse.output.dir}"/>
+    <javac2 destdir="${helloworldeclipse.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.helloworldeclipse}/javac">
+      <compilerarg line="${compiler.args.helloworldeclipse}"/>
+      <bootclasspath refid="helloworldeclipse.module.bootclasspath"/>
+      <classpath refid="helloworldeclipse.module.production.classpath"/>
+      <src refid="helloworldeclipse.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.helloworldeclipse"/>
+    </javac2>
+    
+    <copy todir="${helloworldeclipse.output.dir}">
+      <fileset dir="${module.helloworldeclipse.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.helloworldeclipse.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.helloworldeclipse.tests" depends="register.custom.compilers,compile.module.helloworldeclipse.production" description="compile module HelloWorldEclipse; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.helloworldeclipse" description="cleanup module">
+    <delete dir="${helloworldeclipse.output.dir}"/>
+    <delete dir="${helloworldeclipse.testoutput.dir}"/>
+  </target>
+</project>
