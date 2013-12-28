@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemClick;
+import org.androidannotations.annotations.ItemLongClick;
+import org.androidannotations.annotations.ItemSelect;
+import org.androidannotations.annotations.res.StringArrayRes;
 
-import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.ItemClick;
-import com.googlecode.androidannotations.annotations.ItemLongClick;
-import com.googlecode.androidannotations.annotations.ItemSelect;
-import com.googlecode.androidannotations.annotations.res.StringArrayRes;
 
 // The layout is not set : we use the default layout set in ListActivity
 @EActivity

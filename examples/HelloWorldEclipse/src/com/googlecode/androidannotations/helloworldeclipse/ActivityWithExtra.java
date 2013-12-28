@@ -1,14 +1,14 @@
 package com.googlecode.androidannotations.helloworldeclipse;
 
-import java.util.Date;
-
 import android.app.Activity;
 import android.widget.TextView;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.ViewById;
 
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.Extra;
-import com.googlecode.androidannotations.annotations.ViewById;
+import java.util.Date;
+
 
 @EActivity(R.layout.activity_with_extra)
 public class ActivityWithExtra extends Activity {
